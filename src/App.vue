@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="address">
+      <div>Регион: {{ address.region }}</div>
+      <div>Район: {{ address.area }}</div>
+      <div>Город: {{ address.city }}</div>
+      <div>Улица: {{ address.street }}</div>
+      <div>Дом: {{ address.house }}</div>
+      <div>Квартира: {{ address.flat }}</div>
+    </div>
+
+    <AddressAutocomplete class="autocomplete" @address="getAddress" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AddressAutocomplete from '@/components/shared/AddressAutocomplete';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    AddressAutocomplete,
+  },
+  data: () => ({
+    address: {},
+  }),
+  methods: {
+    getAddress(address) {
+      this.address = { ...address };
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.address {
+  width: 800px;
+  font-size: 24px;
+  margin: 60px auto 36px auto;
+}
+
+.autocomplete {
+  margin: 0 auto;
 }
 </style>
